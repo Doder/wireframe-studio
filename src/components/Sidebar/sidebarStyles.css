@@ -1,0 +1,14 @@
+.Sidebar{
+  height: 100vh;
+  width: 100px;
+  background-color: cadetblue;
+  float: left;
+}
+
+.Sidebar .element-btn{
+  display: inline-block;
+  padding: 5px 15px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
