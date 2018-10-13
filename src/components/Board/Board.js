@@ -6,7 +6,7 @@ const Board = (props) => {
   const renderElements = () => {
     return props.elements.map((el, index) => {
       return (
-        <Group>
+        <Group draggable>
           <Text 
             text='Button' 
             x={el.x-130+10}
@@ -21,7 +21,6 @@ const Board = (props) => {
             y={el.y-10}
             width={60}
             height={20}
-            draggable
           />
         </Group>
       );
@@ -35,6 +34,7 @@ const Board = (props) => {
           onClick={props.stageClicked}
         >
         <Layer>
+          <Rect x={0} y={0} fill='white' width={props.width} height={props.height}/>  
           {renderElements()}
         </Layer>   
       </Stage>

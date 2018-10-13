@@ -11,7 +11,6 @@ class App extends Component {
     this.setState({selectedTool: 'button'});
   }
   stageClicked = (e) => {
-    console.log(e.evt.x, e.evt.y);
     if(this.state.selectedTool){
       const newElements = [...this.state.drawnElements, 
         {type: this.state.selectedTool, x: e.evt.x, y: e.evt.y}];
@@ -19,10 +18,26 @@ class App extends Component {
     }
     
   }
+  export = () => {
+    const canvasElement = document.getElementsByTagName('canvas')[0];
+    //window.location = canvas.toDataURL("image/png");
+    const MIME_TYPE = "image/jpg";
+
+    const imgURL = canvasElement.toDataURL(MIME_TYPE);
+
+    const dlLink = document.createElement('a');
+    dlLink.download = 'wireframe';
+    dlLink.href = imgURL;
+    dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+
+    document.body.appendChild(dlLink);
+    dlLink.click();
+    document.body.removeChild(dlLink);
+  }
   render() {
     return (
       <div>
-        <Sidebar addButton={this.addButton}/>
+        <Sidebar addButton={this.addButton} export={this.export}/>
         <Board 
           width={window.innerWidth - 130} 
           height={window.innerHeight} 
