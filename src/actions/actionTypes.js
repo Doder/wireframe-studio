@@ -1,0 +1,2 @@
+export const DRAW_ELEMENTS = 'DRAW_ELEMENTS';
+export const SELECT_TOOL = 'SELECT_TOOL';
