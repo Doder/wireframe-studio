@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
     case DRAW_ELEMENTS:
       const newElements = [...state.drawnElements, 
       {type: action.payload.type, x: action.payload.x, y: action.payload.y}];
-      return {...state, drawnElements: newElements};
+      return {...state, drawnElements: newElements, selectedTool: null};
     default: 
       return state;
   }
