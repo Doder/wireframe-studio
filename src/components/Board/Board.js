@@ -6,12 +6,16 @@ import {selectTool, drawElements} from '../../actions/actions';
 import './boardStyles.css';
 
 class Board extends Component {
+  state = {
+    transformerVisible: false,
+    clickedElement: null
+  }
   componentDidUpdate(){
     if(!this.transformer) return;
     const stage = this.transformer.getStage();
-    const rectangle = stage.findOne(".rectange-name");
-    if(!rectangle) return;
-    this.transformer.attachTo(rectangle);
+    const el = stage.findOne('.' + this.state.clickedElement);
+    if(!el) return;
+    this.transformer.attachTo(el);
     this.transformer.getLayer().batchDraw();
   }
   stageClicked = (e) => {
@@ -19,27 +23,40 @@ class Board extends Component {
       this.props.drawElements(this.props.selectedTool, e.evt.x, e.evt.y);
     }
   }
+  backgroundClicked = () => {
+    this.setState({transformerVisible: false});
+  }
+  elementClicked = (e) => {
+    this.setState({transformerVisible: true, clickedElement: e.target.parent.name()});
+  }
+  elementDblClicked = (e) => {
+
+  }
   renderElements = () => {
     return this.props.drawnElements.map((el, index) => {
       return (
           <Group 
             draggable 
             key={index}
-            name='rectange-name'
+            name={'el-button-' + index}
+            onClick={this.elementClicked}
+            onDblClick={this.elementDblClicked}
           >
-            <Text 
-              text='Button' 
-              x={el.x-130+10}
-              y={el.y-10+5}
-            />
             <Rect 
-              cornerRadius={4}
+              fill='white'
               stroke='black'
               strokeWidth={2}
               x={el.x-130}
               y={el.y-10}
               width={60}
               height={20}
+              shadowColor='black'
+              shadowOffset={{x: 1, y: 1}}
+            />
+            <Text 
+              text='Button' 
+              x={el.x-130+10}
+              y={el.y-10+5}
             />
           </Group>
       );
@@ -63,10 +80,11 @@ class Board extends Component {
                 height={this.props.height}
                 stroke='grey'
                 strokeWidth={2}
+                onClick={this.backgroundClicked}
               />
               <Transformer 
-                resizeEnabled={false}
-                borderEnabled={false}
+                resizeEnabled={this.state.transformerVisible}
+                borderEnabled={this.state.transformerVisible}
                 enabledAnchors={['top-left', 'top-right', 'bottom-left', 'bottom-right']}
                 padding={2}
                 rotateEnabled={false}
