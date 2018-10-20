@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './sidebarStyles.css';
-import {selectTool} from '../../actions/actions';
+import {selectTool, cleanBoard} from '../../actions/actions';
 import {downloadImage} from '../../Utils/utils';
 
 const Sidebar = (props) => {
@@ -10,6 +10,9 @@ const Sidebar = (props) => {
       <div className='element-btn' onClick={() => props.selectTool('button')}>
         <p>Button</p>
       </div>
+      <div className='element-btn' onClick={() => props.cleanBoard()}>
+        <p>Clean</p>
+      </div>
       <div className='element-btn' onClick={() => downloadImage('image/jpg')}>
         <p>Export</p>
       </div>
@@ -17,4 +20,4 @@ const Sidebar = (props) => {
   );
 }
 
-export default connect(null, {selectTool})(Sidebar);
+export default connect(null, {selectTool, cleanBoard})(Sidebar);
