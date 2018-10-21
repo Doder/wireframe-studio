@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Stage, Layer, Rect, Transformer} from 'react-konva';
+import keydown from 'react-keydown';
 import Button from '../../containers/Elements/Button/Button';
+
 
 import {selectTool, drawElements, setTransformerVisibility} from '../../actions/actions';
 
 import './boardStyles.css';
 
+@keydown('enter')
 class Board extends Component {
   componentDidUpdate(){
     if(!this.transformer) return;
