@@ -4,13 +4,15 @@ import {Stage, Layer, Rect, Transformer} from 'react-konva';
 import keydown from 'react-keydown';
 import Button from '../../containers/Elements/Button/Button';
 
-
-import {selectTool, drawElements, setTransformerVisibility} from '../../actions/actions';
+import {selectTool, drawElements, setTransformerVisibility, removeElement} from '../../actions/actions';
 
 import './boardStyles.css';
 
-@keydown('enter')
 class Board extends Component {
+  @keydown( 'backspace' ) 
+  submit( event ) {
+    this.props.removeElement(this.props.selectedElement);
+  }
   componentDidUpdate(){
     if(!this.transformer) return;
     const stage = this.transformer.getStage();
@@ -22,13 +24,13 @@ class Board extends Component {
   backgroundClicked = (e) => {
     this.props.setTransformerVisibility(false);
     if(this.props.selectedTool){
-      this.props.drawElements(this.props.selectedTool, e.evt.x, e.evt.y);
+      this.props.drawElements(this.props.selectedTool, 'el-'+this.props.selectedTool+'-'+this.props.drawnElements.length, e.evt.x, e.evt.y);
     }
   }
   renderElements = () => {
     return this.props.drawnElements.map((el, index) => {
       return (
-          <Button x={el.x} y={el.y} key={index} name={'el-button-' + index}/>
+          <Button x={el.x} y={el.y} key={el.name} name={el.name}/>
       );
     })
   }
@@ -77,5 +79,6 @@ export default connect(state => ({
 }), {
   selectTool,
   drawElements,
+  removeElement,
   setTransformerVisibility
 })(Board);
