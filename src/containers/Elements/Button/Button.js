@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Group, Rect, Text} from 'react-konva';
 
-import {selectElement, setTransformerVisibility} from '../../../actions/actions';
+import {selectElement, setTransformerVisibility, updateDrawnElement} from '../../../actions/actions';
 
 class Button extends Component{
   state = {
@@ -10,37 +10,46 @@ class Button extends Component{
   }
 
   elementClicked = (e) => {
-    //this.setState({transformerVisible: true, clickedElement: e.target.parent.name()});
     this.props.selectElement(e.target.parent.name());
     this.props.setTransformerVisibility(true);
   }
   elementDblClicked = (e) => {
     this.setState({text: 'New text'});
   }
+  elementDragged = (e) => {
+    const rectWidth = this.state.text.length * 8;
+    this.props.updateDrawnElement({
+      x: e.evt.layerX,
+      y: e.evt.layerY,
+      name: e.target.name()
+    });
+  }
 
   render(){
+    const rectWidth = this.state.text.length * 8;
     return(
       <Group 
         draggable 
+        onDragEnd={this.elementDragged}
         name={this.props.name}
         onClick={this.elementClicked}
         onDblClick={this.elementDblClicked}
+        x={this.props.x-(rectWidth/2)}
+        y={this.props.y-10}
       >
         <Rect 
           fill='white'
           stroke='black'
           strokeWidth={2}
-          x={this.props.x-130}
-          y={this.props.y-10}
-          width={this.state.text.length * 8}
+          width={rectWidth}
           height={20}
           shadowColor='black'
           shadowOffset={{x: 1, y: 1}}
         />
         <Text 
           text={this.state.text} 
-          x={this.props.x-130+8}
-          y={this.props.y-10+5}
+          x={8}
+          y={5}
         />
       </Group>
     );
@@ -50,5 +59,6 @@ class Button extends Component{
 
 export default connect(null, {
   selectElement,
-  setTransformerVisibility
+  setTransformerVisibility,
+  updateDrawnElement
 })(Button);

@@ -4,7 +4,7 @@ import {Stage, Layer, Rect, Transformer} from 'react-konva';
 import keydown from 'react-keydown';
 import Button from '../../containers/Elements/Button/Button';
 
-import {selectTool, drawElements, setTransformerVisibility, removeElement} from '../../actions/actions';
+import {selectTool, drawElements, setTransformerVisibility, removeElement, redrawElements} from '../../actions/actions';
 
 import './boardStyles.css';
 
@@ -12,6 +12,16 @@ class Board extends Component {
   @keydown( 'backspace' ) 
   submit( event ) {
     this.props.removeElement(this.props.selectedElement);
+  }
+  //componentWill
+  componentDidMount(){
+    const lastElements = JSON.parse(localStorage.getItem('drawnElements'));
+    if(lastElements && lastElements.length > 0){
+      this.props.redrawElements(JSON.parse(localStorage.getItem('drawnElements')));
+    }
+    setInterval(() => {
+      localStorage.setItem('drawnElements', JSON.stringify(this.props.drawnElements));
+    }, 5000);
   }
   componentDidUpdate(){
     if(!this.transformer) return;
@@ -24,7 +34,12 @@ class Board extends Component {
   backgroundClicked = (e) => {
     this.props.setTransformerVisibility(false);
     if(this.props.selectedTool){
-      this.props.drawElements(this.props.selectedTool, 'el-'+this.props.selectedTool+'-'+this.props.drawnElements.length, e.evt.x, e.evt.y);
+      this.props.drawElements(
+        this.props.selectedTool, 
+        'el-'+this.props.selectedTool+'-'+this.props.drawnElements.length,
+        e.evt.layerX, 
+        e.evt.layerY
+      );
     }
   }
   renderElements = () => {
@@ -80,5 +95,6 @@ export default connect(state => ({
   selectTool,
   drawElements,
   removeElement,
-  setTransformerVisibility
+  setTransformerVisibility,
+  redrawElements
 })(Board);
