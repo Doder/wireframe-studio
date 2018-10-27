@@ -17,7 +17,7 @@ class Board extends Component {
   componentDidMount(){
     const lastElements = JSON.parse(localStorage.getItem('drawnElements'));
     if(lastElements && lastElements.length > 0){
-      this.props.redrawElements(JSON.parse(localStorage.getItem('drawnElements')));
+      this.props.redrawElements(lastElements);
     }
     setInterval(() => {
       localStorage.setItem('drawnElements', JSON.stringify(this.props.drawnElements));

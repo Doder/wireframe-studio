@@ -19,8 +19,8 @@ class Button extends Component{
   elementDragged = (e) => {
     const rectWidth = this.state.text.length * 8;
     this.props.updateDrawnElement({
-      x: e.evt.layerX,
-      y: e.evt.layerY,
+      x: e.target.attrs.x,
+      y: e.target.attrs.y,
       name: e.target.name()
     });
   }
@@ -34,8 +34,8 @@ class Button extends Component{
         name={this.props.name}
         onClick={this.elementClicked}
         onDblClick={this.elementDblClicked}
-        x={this.props.x-(rectWidth/2)}
-        y={this.props.y-10}
+        x={this.props.x}
+        y={this.props.y}
       >
         <Rect 
           fill='white'
