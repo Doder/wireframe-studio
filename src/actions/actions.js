@@ -6,7 +6,9 @@ import {
   CLEAN_BOARD, 
   REMOVE_ELEMENT, 
   REDRAW_ELEMENTS,
-  UPDATE_DRAWN_ELEMENT
+  UPDATE_DRAWN_ELEMENT,
+  TOGGLE_MODAL,
+  RENAME
 } from './actionTypes';
 
 export const selectTool = (tool) => ({
@@ -51,4 +53,16 @@ export const removeElement = (element) => ({
 export const updateDrawnElement = (props) => ({
   type: UPDATE_DRAWN_ELEMENT,
   payload: props
+});
+
+export const toggleModal = () => ({
+  type: TOGGLE_MODAL
+});
+
+export const rename = (name, text) => ({
+  type: RENAME,
+  payload: {
+    text,
+    name
+  }
 });

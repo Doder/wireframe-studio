@@ -6,14 +6,17 @@ import {
   CLEAN_BOARD, 
   REMOVE_ELEMENT, 
   REDRAW_ELEMENTS,
-  UPDATE_DRAWN_ELEMENT
+  UPDATE_DRAWN_ELEMENT,
+  TOGGLE_MODAL,
+  RENAME
 } from '../actions/actionTypes';
 
 const initialState = {
   selectedTool: null,
   drawnElements: [],
   selectedElement: null,
-  transformerVisible: false
+  transformerVisible: false,
+  showModal: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +42,16 @@ const reducer = (state = initialState, action) => {
       newElements = state.drawnElements.map((el) => {
         if(el.name === action.payload.name){
           return {...el, x: action.payload.x, y: action.payload.y};
+        }
+        return el;
+      });
+      return {...state, drawnElements: newElements};
+    case TOGGLE_MODAL:
+      return {...state, showModal: !state.showModal};
+    case RENAME:
+      newElements = state.drawnElements.map((el) => {
+        if(el.name === action.payload.name){
+          return {...el, text: action.payload.text};
         }
         return el;
       });

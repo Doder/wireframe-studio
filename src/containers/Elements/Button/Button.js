@@ -2,22 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Group, Rect, Text} from 'react-konva';
 
-import {selectElement, setTransformerVisibility, updateDrawnElement} from '../../../actions/actions';
+import {selectElement, setTransformerVisibility, updateDrawnElement, toggleModal} from '../../../actions/actions';
 
 class Button extends Component{
-  state = {
-    text: 'Button'
-  }
-
   elementClicked = (e) => {
     this.props.selectElement(e.target.parent.name());
     this.props.setTransformerVisibility(true);
   }
   elementDblClicked = (e) => {
-    this.setState({text: 'New text'});
+    this.props.toggleModal();
   }
   elementDragged = (e) => {
-    const rectWidth = this.state.text.length * 8;
     this.props.updateDrawnElement({
       x: e.target.attrs.x,
       y: e.target.attrs.y,
@@ -26,7 +21,7 @@ class Button extends Component{
   }
 
   render(){
-    const rectWidth = this.state.text.length * 8;
+    const rectWidth = this.props.text.length * 8;
     return(
       <Group 
         draggable 
@@ -47,7 +42,7 @@ class Button extends Component{
           shadowOffset={{x: 1, y: 1}}
         />
         <Text 
-          text={this.state.text} 
+          text={this.props.text} 
           x={8}
           y={5}
         />
@@ -57,8 +52,11 @@ class Button extends Component{
   }
 }
 
-export default connect(null, {
+export default connect(state => ({
+  drawnElements: state.drawnElements
+}), {
   selectElement,
   setTransformerVisibility,
-  updateDrawnElement
+  updateDrawnElement,
+  toggleModal
 })(Button);

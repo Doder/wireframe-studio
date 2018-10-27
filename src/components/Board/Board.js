@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Stage, Layer, Rect, Transformer} from 'react-konva';
 import keydown from 'react-keydown';
 import Button from '../../containers/Elements/Button/Button';
+import Modal from '../../components/UI/Modal/Modal';
 
 import {selectTool, drawElements, setTransformerVisibility, removeElement, redrawElements} from '../../actions/actions';
 
@@ -45,7 +46,7 @@ class Board extends Component {
   renderElements = () => {
     return this.props.drawnElements.map((el, index) => {
       return (
-          <Button x={el.x} y={el.y} key={el.name} name={el.name}/>
+          <Button x={el.x} y={el.y} key={el.name} name={el.name} text={el.text || 'Button'}/>
       );
     })
   }
@@ -81,6 +82,7 @@ class Board extends Component {
             </Layer>   
           </Stage>
         </div>
+        <Modal/>
       </div>  
     );
   }

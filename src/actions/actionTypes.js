@@ -6,3 +6,5 @@ export const REMOVE_ELEMENT = 'REMOVE_ELEMENT';
 export const CLEAN_BOARD = 'CLEAN_BOARD';
 export const REDRAW_ELEMENTS = 'REDRAW_ELEMENTS';
 export const UPDATE_DRAWN_ELEMENT = 'UPDATE_DRAWN_ELEMENT';
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+export const RENAME = 'RENAME';
