@@ -9,10 +9,30 @@
 
 .modal{
   width: 300px;
-  height: 200px;
+  padding: 12px;
   background-color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 4px;
+}
+
+.modal > input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal > button{
+  text-align: center;
+  padding: 10px 40px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  float: right;
+  border-radius: 4px;
 }
