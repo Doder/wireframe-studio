@@ -23,12 +23,19 @@ class Modal extends Component {
     e.preventDefault();
     this.setState({text: e.target.value});
   }
+  keyTyped = (e) => {
+    //enter
+    if(e.keyCode === 13){
+      this.renameClicked(e);
+    }
+  }
   render(){
     return(
       this.props.showModal ? 
       <div className='overlay' onClick={this.overlayClicked}>
         <div className='modal' onClick={this.modalClicked}>
-          <input type='text' width='200px' value={this.state.text} onChange={this.textChanged}/>
+          <input type='text' width='200px' value={this.state.text} onChange={this.textChanged}
+          onKeyDown={this.keyTyped}/>
           <button onClick={this.renameClicked}>Rename</button>
         </div>
       </div>

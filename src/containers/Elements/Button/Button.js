@@ -21,7 +21,7 @@ class Button extends Component{
   }
 
   render(){
-    const rectWidth = this.props.text.length * 8;
+    const rectWidth = this.props.text.length * 9;
     return(
       <Group 
         draggable 
@@ -42,7 +42,7 @@ class Button extends Component{
           shadowOffset={{x: 1, y: 1}}
         />
         <Text 
-          text={this.props.text} 
+          text={this.props.text}
           x={8}
           y={5}
         />
