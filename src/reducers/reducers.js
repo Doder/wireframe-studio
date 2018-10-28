@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_DRAWN_ELEMENT: 
       newElements = state.drawnElements.map((el) => {
         if(el.name === action.payload.name){
-          return {...el, x: action.payload.x, y: action.payload.y};
+          return {...el, ...action.payload};
         }
         return el;
       });

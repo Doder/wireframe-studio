@@ -46,7 +46,15 @@ class Board extends Component {
   renderElements = () => {
     return this.props.drawnElements.map((el, index) => {
       return (
-          <Button x={el.x} y={el.y} key={el.name} name={el.name} text={el.text || 'Button'}/>
+          <Button 
+            x={el.x} 
+            y={el.y} 
+            key={el.name} 
+            name={el.name}
+            text={el.text || 'Button'}
+            scaleX={el.scaleX} 
+            scaleY={el.scaleY}
+          />
       );
     })
   }
