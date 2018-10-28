@@ -8,8 +8,8 @@ class App extends Component {
       <div>
         <Sidebar/>
         <Board 
-          width={window.innerWidth - 200} 
-          height={window.innerHeight - 50} 
+          width={1000} 
+          height={window.innerHeight - 100} 
         />
       </div>
     );

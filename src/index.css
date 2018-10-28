@@ -5,3 +5,7 @@
   font-family: "Open Sans", sans-serif;
   box-sizing: border-box;
 }
+
+body{
+  background-color: #eee;
+}

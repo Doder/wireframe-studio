@@ -61,6 +61,12 @@ class Board extends Component {
   render(){
     return(
       <div className='Board'>
+        <div className='topbar'>
+          <div className='search-bar'></div>
+          <div className='circle'></div>
+          <div className='circle'></div>
+          <div className='circle'></div>
+        </div>
         <div className='canvas-container'>
           <Stage
               width={this.props.width} 
@@ -73,7 +79,7 @@ class Board extends Component {
                 fill='white' 
                 width={this.props.width} 
                 height={this.props.height}
-                stroke='grey'
+                stroke='#ccc'
                 strokeWidth={2}
                 onClick={this.backgroundClicked}
               />
