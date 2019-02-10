@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import Board from '../../components/Board/Board';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faAd, faTrashAlt, faFileExport, faMousePointer } from '@fortawesome/free-solid-svg-icons';
+import { faAd, faTrashAlt, faFileExport, faMousePointer, faImage } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faAd, faTrashAlt, faFileExport, faMousePointer);
+library.add(faAd, faTrashAlt, faFileExport, faMousePointer, faImage);
 
 class App extends Component {
   render() {

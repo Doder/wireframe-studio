@@ -15,6 +15,9 @@ const Sidebar = (props) => {
       <div className='element-btn' onClick={() => props.selectTool('button')}>
         <FontAwesomeIcon icon="ad" className='fa-icon'/>
       </div>
+      <div className='element-btn' onClick={() => props.selectTool('image')}>
+        <FontAwesomeIcon icon="image" className='fa-icon'/>
+      </div>
       <div className='element-btn' onClick={() => props.cleanBoard()}>
         <FontAwesomeIcon icon="trash-alt" className='fa-icon'/>
       </div>

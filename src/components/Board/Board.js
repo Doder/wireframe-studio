@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Stage, Layer, Rect, Transformer} from 'react-konva';
 import keydown from 'react-keydown';
 import Button from '../../containers/Elements/Button/Button';
+import Image from '../../containers/Elements/Image/Image';
 import Modal from '../../components/UI/Modal/Modal';
 
 import {selectTool, drawElements, setTransformerVisibility, removeElement, redrawElements} from '../../actions/actions';
@@ -14,7 +15,6 @@ class Board extends Component {
   submit( event ) {
     this.props.removeElement(this.props.selectedElement);
   }
-  //componentWill
   componentDidMount(){
     const lastElements = JSON.parse(localStorage.getItem('drawnElements'));
     if(lastElements && lastElements.length > 0){
@@ -45,8 +45,10 @@ class Board extends Component {
   }
   renderElements = () => {
     return this.props.drawnElements.map((el, index) => {
-      return (
-          <Button 
+      switch (el.type) {
+        case 'button':
+          return (
+            <Button 
             x={el.x} 
             y={el.y} 
             key={el.name} 
@@ -54,8 +56,20 @@ class Board extends Component {
             text={el.text || 'Button'}
             scaleX={el.scaleX} 
             scaleY={el.scaleY}
-          />
-      );
+          />);
+        case 'image':
+          return (
+            <Image 
+            x={el.x} 
+            y={el.y} 
+            key={el.name} 
+            name={el.name}
+            scaleX={el.scaleX} 
+            scaleY={el.scaleY}
+          />);
+        default:
+          return null;
+      }
     })
   }
   render(){
