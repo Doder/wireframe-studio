@@ -100,7 +100,6 @@ class Board extends Component {
               <Transformer 
                 resizeEnabled={this.props.transformerVisible}
                 borderEnabled={this.props.transformerVisible}
-                enabledAnchors={['top-left', 'top-right', 'bottom-left', 'bottom-right']}
                 padding={2}
                 rotateEnabled={false}
                 keepRatio={true}
